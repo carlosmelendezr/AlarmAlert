@@ -8,11 +8,12 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CustomAdapter extends BaseAdapter {
+public class EventoAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
-    private ArrayList<RegistroEvento> objects;
+    private List<Evento> objects;
 
     private class ViewHolder {
         TextView textView1;
@@ -21,7 +22,7 @@ public class CustomAdapter extends BaseAdapter {
         TextView textView4;
     }
 
-    public CustomAdapter(Context context, ArrayList<RegistroEvento> objects) {
+    public EventoAdapter(Context context, List<Evento> objects) {
         inflater = LayoutInflater.from(context);
         this.objects = objects;
     }
@@ -30,7 +31,7 @@ public class CustomAdapter extends BaseAdapter {
         return objects.size();
     }
 
-    public RegistroEvento getItem(int position) {
+    public Evento getItem(int position) {
         return objects.get(position);
     }
 
@@ -51,10 +52,10 @@ public class CustomAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.textView1.setText(objects.get(position).getLocalidad());
-        holder.textView2.setText(objects.get(position).getPersona());
+        holder.textView1.setText(objects.get(position).getCodigocid());
+        holder.textView2.setText(objects.get(position).getUsuario());
         holder.textView3.setText(objects.get(position).getFecha().toString());
-        holder.textView4.setText(objects.get(position).getEvento());
+        holder.textView4.setText(objects.get(position).getParticion());
         return convertView;
     }
 }
