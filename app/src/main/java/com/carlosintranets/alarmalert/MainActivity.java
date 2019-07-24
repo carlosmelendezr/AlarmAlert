@@ -1,6 +1,10 @@
 package com.carlosintranets.alarmalert;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteCursorDriver;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteQuery;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -29,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     ListView Localidades ;
     ListView mainList;
     Context contexto = this;
+    SqlEvento Datosvento = new SqlEvento(contexto,null,null,1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,15 +48,9 @@ public class MainActivity extends AppCompatActivity {
         //ArrayList<RegistroEvento> objects = new ArrayList<RegistroEvento>();
         ArrayList<Estatus> estatus = new ArrayList<Estatus>();
 
-        // Agregando eventos de prueba
-        /*RegistroEvento reg1 = new RegistroEvento(1, "Las Mercedes",
-                new Date(),"Apertura","Pedro");
 
-        RegistroEvento reg2 = new RegistroEvento(1, "Santa Monica",
-                new Date(),"Apertura","Maria");
 
-        objects.add(reg1);
-        objects.add(reg2);*/
+
 
         // Agregando estados de pruebas
         Estatus Tienda1 = new Estatus(Estatus.ESTADO_ABIERTO,"Las Mercedes",
@@ -97,6 +96,9 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<EventoGrupo> call, Response<EventoGrupo> response) {
                 Log.i("AlarmAlert","Obteniendo el listado");
                 List<Evento> eventos = response.body().getEventos();
+                for(Evento ev:eventos) {
+                    Datosvento.crearEvento(ev);
+                }
 
                 EventoAdapter eventoAdapter = new EventoAdapter(contexto, eventos);
                 mainList.setAdapter(eventoAdapter);

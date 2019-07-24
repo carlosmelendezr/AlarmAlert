@@ -13,6 +13,10 @@ public class Evento {
     String usuario;
     String recibidode;
 
+    public Evento() {
+
+    }
+
     public Evento(String id, String numero, String fecha, String cuenta, String codigocid,
                   String particion, String zona, String usuario, String recibidode) {
         this.id = id;
